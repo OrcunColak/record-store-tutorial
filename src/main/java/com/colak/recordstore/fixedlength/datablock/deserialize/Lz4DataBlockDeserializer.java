@@ -2,16 +2,13 @@ package com.colak.recordstore.fixedlength.datablock.deserialize;
 
 import com.colak.recordstore.fixedlength.BinaryPagedStoreConstants;
 import com.colak.recordstore.fixedlength.datablock.DataBlock;
+import net.jpountz.lz4.LZ4Factory;
 import net.jpountz.lz4.LZ4FastDecompressor;
 
 import java.nio.ByteBuffer;
 
 public final class Lz4DataBlockDeserializer implements DataBlockDeserializer {
-    private final LZ4FastDecompressor decompressor;
-
-    public Lz4DataBlockDeserializer(LZ4FastDecompressor decompressor) {
-        this.decompressor = decompressor;
-    }
+    private final LZ4FastDecompressor decompressor = LZ4Factory.fastestInstance().fastDecompressor();;
 
     @Override
     public DataBlock deserialize(long blockIndex, ByteBuffer block) {

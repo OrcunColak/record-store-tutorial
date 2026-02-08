@@ -16,14 +16,8 @@ public class BlockWriter implements AutoCloseable {
     private final DataBlockSerializer serializer;
 
     public BlockWriter(Path path, DataBlockSerializer serializer) throws IOException {
-        this.channel = FileChannel.open(path,
-                StandardOpenOption.CREATE,
-                StandardOpenOption.WRITE,
-                StandardOpenOption.APPEND);
-
-        this.rawBuffer = ByteBuffer.allocate(
-                BinaryPagedStoreConstants.BLOCK_SIZE - BinaryPagedStoreConstants.HEADER_SIZE);
-
+        this.channel = FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+        this.rawBuffer = ByteBuffer.allocate(BinaryPagedStoreConstants.BLOCK_SIZE - BinaryPagedStoreConstants.HEADER_SIZE);
         this.serializer = serializer;
     }
 
